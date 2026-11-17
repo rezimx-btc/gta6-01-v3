@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLMAR LIVE — Streets of Gold</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0a0f14; font-family: 'Segoe UI', system-ui, sans-serif; }
+  #game { position: fixed; inset: 0; }
+  #game canvas { display: block; }
+  #hud { position: fixed; inset: 0; pointer-events: none; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.8); z-index: 10; }
+  #hud-top-left { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 4px; }
+  #hud-health, #hud-armor, #hud-ammo, #hud-cash { font-size: 20px; font-weight: 700; }
+  #hud-wanted { font-size: 22px; color: #ffd24a; letter-spacing: 2px; }
+  #hud-top-right { position: absolute; top: 12px; right: 12px; text-align: right; display: flex; flex-direction: column; gap: 4px; }
+  #hud-viewers { font-size: 18px; font-weight: 700; color: #ff5a5a; }
+  #hud-hype { font-size: 16px; color: #ffd24a; font-weight: 700; }
+  #hud-chat { font-size: 13px; max-width: 320px; background: rgba(0,0,0,.45); border-radius: 6px; padding: 6px 8px; margin-top: 4px; }
+  #hud-chat .chat-msg { color: #e8e8e8; }
+  #hud-chat .chat-don { color: #2fd68a; font-weight: 700; }
+  #hud-chat .chat-snitch { color: #ff5a5a; font-weight: 700; }
+  #hud-chat .chat-sys { color: #ffd24a; font-weight: 700; }
+  #hud-bottom-left { position: absolute; bottom: 12px; left: 12px; display: flex; flex-direction: column; gap: 4px; }
+  #hud-objective { font-size: 16px; font-weight: 600; background: rgba(0,0,0,.5); padding: 6px 10px; border-radius: 6px; max-width: 520px; }
+  #hud-rank { font-size: 14px; color: #ffd24a; font-weight: 700; }
+  #hud-radio { font-size: 13px; color: #bfe3ff; }
+  #hud-bottom-right { position: absolute; bottom: 12px; right: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  #hud-speed { font-size: 28px; font-weight: 800; }
+  #minimap { width: 190px; height: 140px; border: 2px solid rgba(255,255,255,.35); border-radius: 6px; background: #24351f; }
+  #hud-banner { position: absolute; top: 18%; left: 50%; transform: translateX(-50%); font-size: 24px; font-weight: 800; color: #ffd24a; background: rgba(0,0,0,.6); padding: 10px 22px; border-radius: 8px; display: none; text-align: center; max-width: 80%; }
+  #hud-toast { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); font-size: 15px; background: rgba(0,0,0,.6); padding: 6px 14px; border-radius: 6px; display: none; }
+  #hud-end { position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%); font-size: 34px; font-weight: 900; color: #ff4444; background: rgba(0,0,0,.7); padding: 18px 34px; border-radius: 10px; display: none; text-align: center; }
+  #hud-help { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 12px; color: rgba(255,255,255,.65); background: rgba(0,0,0,.4); padding: 4px 10px; border-radius: 5px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="game"></div>
+<div id="hud">
+  <div id="hud-top-left">
+    <div id="hud-health">♥ 100</div>
+    <div id="hud-armor">🛡 0</div>
+    <div id="hud-ammo">🔫 24</div>
+    <div id="hud-cash">$0</div>
+    <div id="hud-wanted">☆☆☆☆☆</div>
+  </div>
+  <div id="hud-top-right">
+    <div id="hud-viewers">⚫ OFF AIR</div>
+    <div id="hud-hype"></div>
+    <div id="hud-chat"></div>
+  </div>
+  <div id="hud-bottom-left">
+    <div id="hud-objective">Next job: First Delivery — go to the marker</div>
+    <div id="hud-rank">RANK: Nobody</div>
+    <div id="hud-radio">Radio off</div>
+  </div>
+  <div id="hud-bottom-right">
+    <div id="hud-speed">0 km/h</div>
+    <canvas id="minimap" width="190" height="140"></canvas>
+  </div>
+  <div id="hud-banner"></div>
+  <div id="hud-toast"></div>
+  <div id="hud-end"></div>
+  <div id="hud-help">WASD move/drive · E enter car / shop · Space shoot · Shift run · 1/2/3 radio · F5 save · M mute · R restart — SOLMAR LIVE, every heist streamed</div>
+</div>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js" } }
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
